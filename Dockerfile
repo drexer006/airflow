@@ -2091,7 +2091,7 @@ ARG TARGETARCH
 ARG DEPENDENCY_CACHE_EPOCH="11"
 
 # hadolint ignore=SC2086, SC2010, DL3042
-RUN --mount=type=cache,id=s/5e8461e9-a939-40d4-baea-2f5a2f01cfeb-tmp-cache,target=/tmp/.cache/,uid=${AIRFLOW_UID} \
+RUN --mount=type=cache,id=s/5e8461e9-a939-40d4-baea-2f5a2f01cfeb-/tmp/.cache/,target=/tmp/.cache/,uid=${AIRFLOW_UID} \
     if [[ ${INSTALL_DISTRIBUTIONS_FROM_CONTEXT} == "true" ]]; then \
         bash /scripts/docker/install_from_docker_context_files.sh; \
     fi; \
@@ -2111,7 +2111,7 @@ RUN --mount=type=cache,id=s/5e8461e9-a939-40d4-baea-2f5a2f01cfeb-tmp-cache,targe
 # during the build additionally to whatever has been installed so far. It is recommended that
 # the requirements.txt contains only dependencies with == version specification
 # hadolint ignore=DL3042
-RUN --mount=type=cache,id=s/5e8461e9-a939-40d4-baea-2f5a2f01cfeb-tmp-cache,target=/tmp/.cache/,uid=${AIRFLOW_UID} \
+RUN --mount=type=cache,id=s/5e8461e9-a939-40d4-baea-2f5a2f01cfeb-/tmp/.cache/,target=/tmp/.cache/,uid=${AIRFLOW_UID} \
     if [[ -f /docker-context-files/requirements.txt ]]; then \
         pip install -r /docker-context-files/requirements.txt; \
         find "${AIRFLOW_USER_HOME_DIR}/.local/" -name '*.pyc' -print0 | xargs -0 rm -f || true ; \
